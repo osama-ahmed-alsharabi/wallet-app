@@ -35,7 +35,9 @@ class User {
       id: json["id"],
       type: json["type"],
       name: json["name"],
-      account: AccountModel.fromJson(json["account"]),
+      account: json["account"] == null
+          ? null
+          : AccountModel.fromJson(json["account"]),
       active: json["active"],
       updatedAt: DateTime.parse(json["updatedAt"]),
       createdAt: DateTime.parse(json["createdAt"]),
