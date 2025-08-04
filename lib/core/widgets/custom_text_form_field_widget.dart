@@ -5,12 +5,14 @@ class CustomTextFormFieldWidget extends StatelessWidget {
   final bool? isPassword;
   final String hint;
   final IconData icon;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
   const CustomTextFormFieldWidget({
     super.key,
     required this.label,
     required this.isPassword,
     required this.hint,
-    required this.icon,
+    required this.icon, required this.controller, this.validator,
   });
 
   @override
@@ -27,6 +29,8 @@ class CustomTextFormFieldWidget extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         TextFormField(
+          validator: validator,
+          controller: controller,
           textAlign: TextAlign.right,
           obscureText: isPassword ?? false,
           cursorColor: Color(0xff4EB7F2),
