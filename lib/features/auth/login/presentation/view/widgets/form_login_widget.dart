@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wallet_app/core/helpers/snack_bar_helper.dart';
 import 'package:wallet_app/core/helpers/validator_helper.dart';
 import 'package:wallet_app/core/utils/app_colors.dart';
 import 'package:wallet_app/core/widgets/custom_button_widget.dart';
@@ -27,6 +28,7 @@ class _FormLoginWidgetState extends State<FormLoginWidget> {
     passwordController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
@@ -37,9 +39,11 @@ class _FormLoginWidgetState extends State<FormLoginWidget> {
             MaterialPageRoute(builder: (context) => HomeView()),
           );
         } else if (state is LoginFailure) {
-          ScaffoldMessenger.of(
+          SnackBarHelper.snackBarHelper(
+            "كلمة السر او الأيميل غير صحيح",
+            Colors.red,
             context,
-          ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+          );
         }
       },
       child: Form(
